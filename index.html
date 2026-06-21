@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图片与视频共享库 – 免费在线媒体画廊 | VanSon.COM</title>
+    <meta name="description" content="使用我们的免费在线媒体库上传、管理和分享图片及MP4视频。支持JPG、PNG、GIF、WebP和MP4格式，搭配Nnepie存储。免费媒体托管与分享。" />
+    <meta name="keywords" content="图片分享, 视频分享, 媒体库, 相册, 视频画廊, 上传图片, 上传视频, Nnepie, 免费媒体托管, VanSon, JPG, PNG, GIF, WebP, MP4" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://img.ws-expo.com/" />
+    <meta property="og:title" content="图片与视频共享库 – 免费在线媒体画廊" />
+    <meta property="og:description" content="使用我们的免费在线媒体库上传、管理和分享图片及MP4视频。支持JPG、PNG、GIF、WebP和MP4格式，搭配Nnepie存储。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://img.ws-expo.com/" />
+    <meta property="og:site_name" content="VanSon.COM 媒体库" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="图片与视频共享库 – 免费在线媒体画廊" />
+    <meta name="twitter:description" content="上传、管理和分享图片及MP4视频的免费在线媒体库。支持JPG、PNG、GIF、WebP和MP4，搭配Nnepie存储。" />
+    <link rel="stylesheet" href="/media.css">
+    <link rel="shortcut icon" href="https://www.ws-expo.com/favicon.ico" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5817772454670441" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "图片与视频共享库",
+            "description": "免费的在线媒体库，用于上传、管理和分享图片及MP4视频，采用Nnepie存储。",
+            "url": "https://img.ws-expo.com/",
+            "applicationCategory": "多媒体",
+            "browserRequirements": "需要JavaScript",
+            "operatingSystem": "所有系统",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <a href="https://www.ws-expo.com" target="_blank">
+                <img class="site-logo" src="https://retro.ws-expo.com/img/logo-vanson.png" alt="NnePie 标志" loading="lazy" />
+            </a>
+            <h1 class="site-title">
+                📸 图片与视频共享库
+                <small>· <a href="https://www.ws-expo.com" target="_blank">万盛</a>媒体库</small>
+            </h1>
+        </header>
+
+        <!-- 上传区域 -->
+        <div class="upload-area" id="uploadZone">
+            <div class="upload-content" id="uploadContent">
+                <span class="icon">🖼️</span>
+                <h3>点击或拖拽上传图片 / MP4 视频</h3>
+                <p>支持 JPG、PNG、GIF、WebP 和 MP4 – 每个文件最大 92MB</p>
+                <input type="file" id="fileInput" accept="image/*,video/mp4" multiple />
+            </div>
+            <div class="uploading-overlay" id="uploadingOverlay">
+                <div class="spinner"></div>
+                <div class="uploading-text" id="uploadingText">正在上传文件...</div>
+                <div class="uploading-progress" id="uploadingProgress"></div>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <div class="info">📂 共 <strong id="countLabel">0</strong> 个文件</div>
+            <div class="btn-group">
+                <button class="btn btn-success" id="copyAllBtn">📋 复制全部链接</button>
+                <button class="btn btn-danger" id="clearAllBtn">🗑️ 清空列表</button>
+            </div>
+        </div>
+
+        <div class="gallery" id="gallery"></div>
+
+        <div class="pagination" id="pagination">
+            <button class="btn btn-sm btn-primary" id="prevPage" disabled>上一页</button>
+            <span class="page-info" id="pageInfo">第 1 页 / 共 1 页</span>
+            <button class="btn btn-sm btn-primary" id="nextPage" disabled>下一页</button>
+        </div>
+
+        <section class="help-section">
+            <details>
+                <summary>📖 如何使用本媒体库</summary>
+                <div class="content">
+                    <p><strong>上传文件：</strong>点击上传区域或拖放您的图片（JPG、PNG、GIF、WebP）或MP4视频。每个文件大小不得超过92MB。</p>
+                    <p><strong>管理文件：</strong>每个上传的文件会以卡片形式展示。您可以：</p>
+                    <ul>
+                        <li><strong>复制单个链接：</strong>点击缩略图或文件名 – 直接链接将复制到剪贴板。</li>
+                        <li><strong>复制当前页全部链接：</strong>使用工具栏中的 <strong>“复制全部链接”</strong> 按钮。当前页（最多50项）的所有链接将按行复制。</li>
+                        <li><strong>预览：</strong>点击文件名可打开大图查看，视频将显示播放控件。</li>
+                        <li><strong>删除：</strong>从本地列表中移除文件（云端副本保留不变）。</li>
+                    </ul>
+                    <p><strong>分页：</strong>使用“上一页/下一页”按钮浏览您的收藏。媒体库会将上传的文件保存在浏览器的本地存储中。</p>
+                    <p><strong>免费且安全：</strong>所有媒体托管在 <strong>VanSon</strong> 上，并自动进行优化（<code>q_auto,f_auto</code>）。您的文件仅存在于您的设备中 – 我们不会将其存储在服务器上。</p>
+                </div>
+            </details>
+            <details>
+                <summary>❓ 常见问题解答</summary>
+                <div class="content">
+                    <p><strong>支持哪些文件格式？</strong><br /> 图片支持 <strong>JPG、PNG、GIF、WebP</strong>，视频支持 <strong>MP4</strong>。其他格式不予接受。</p>
+                    <p><strong>文件大小有限制吗？</strong><br /> 
+                    是的，Nnepie 免费计划限制每个文件 <strong>92 MB</strong>。更大的文件将被拒绝。</p>
+                    <p><strong>文件会保存多久？</strong><br /> 
+                    文件依据您的上传预设保存在 Nnepie 上。只要 VanSon 保留它们，即可持续访问。本媒体库不会删除您的云端文件，仅管理浏览器本地存储中的列表。</p>
+                    <p><strong>我可以分享文件给他人吗？</strong><br /> 当然可以 – 每个文件都有一个永久且可分享的链接。使用复制功能获取链接，即可在任何地方分享。</p>
+                    <p><strong>清空列表会发生什么？</strong><br /> “清空列表”按钮会移除本地列表中的所有条目，但 <strong>不会删除</strong> Nnepie 上的实际文件。您之后可以重新上传或手动添加链接（此功能尚未支持）。</p>
+                    <p><strong>为什么使用代理域名（<a href="https://img.ws-expo.com">img.ws-expo.com</a>）？</strong><br /> 我们通过代理自动添加图片优化参数（<code>q_auto,f_auto</code>），以加快加载速度并提升性能。原始 Nnepie 链接同样可访问。</p>
+                    <p><strong>这项服务免费吗？</strong><br />
+                     是的，本媒体库完全免费供个人和商业使用，由 Nnepie 免费套餐提供支持。</p>
+                </div>
+            </details>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="copyright">
+                &copy; <span id="currentYear">2026</span>
+                <a href="https://www.ws-expo.com" target="_blank">尼日利亚国际新能源与电力产业博览会</a>。
+                保留所有权利。
+            </div>
+            <div class="footer-links">
+                <a href="https://www.ws-expo.com/privacy-policy/" target="_blank">隐私政策</a>
+                <span class="link-divider">·</span>
+                <a href="https://www.ws-expo.com/terms-of-service/" target="_blank">服务条款</a>
+                <span class="link-divider">·</span>
+                <a href="https://www.ws-expo.com/about/" target="_blank">关于 NnePie</a>
+                <span class="link-divider">·</span>
+                <a href="https://www.ws-expo.com/faq/" target="_blank">常见问题</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 模态框 -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">✕</button>
+            <div class="modal-media" id="modalMediaContainer"></div>
+            <div class="modal-info">
+                <span id="modalName">文件名</span>
+                <span id="modalMeta">大小 · 时间</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast 容器 -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+        // ================================================================
+        // 配置
+        // ================================================================
+        var CLOUD_NAME = 'do4vo05jd';
+        var UPLOAD_PRESET = 'my_unsigned_preset';
+        var PROXY_DOMAIN = 'https://media.nnepie.com';
+        var STORAGE_KEY = 'cloudinary_media_list';
+        var PAGE_SIZE = 50;
+
+        var currentPage = 1;
+
+        // ================================================================
+        // 本地存储辅助
+        // ================================================================
+        function getLocalMedia() {
+            try {
+                var data = localStorage.getItem(STORAGE_KEY);
+                return data ? JSON.parse(data) : [];
+            } catch {
+                return [];
+            }
+        }
+
+        function saveLocalMedia(items) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+        }
+
+        // ================================================================
+        // 工具函数
+        // ================================================================
+        function getDisplayName(filename) {
+            var idx = filename.lastIndexOf('.');
+            return idx > 0 ? filename.substring(0, idx) : filename;
+        }
+
+        function formatSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            if (bytes < 1024 * 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+            return (bytes / (1024 * 1024 * 1024)).toFixed(1) + ' GB';
+        }
+
+        function formatTime(iso) {
+            var d = new Date(iso);
+            return d.toLocaleString('zh-CN', { hour12: false });
+        }
+
+        function showToast(msg, type) {
+            type = type || 'info';
+            var container = document.getElementById('toastContainer');
+            var toast = document.createElement('div');
+            toast.className = 'toast ' + type;
+            toast.textContent = msg;
+            container.appendChild(toast);
+            setTimeout(function() {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(40px)';
+                toast.style.transition = 'all 0.3s';
+                setTimeout(function() { toast.remove(); }, 300);
+            }, 2800);
+        }
+
+        function copyUrl(url) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(function() {
+                    showToast('链接已复制！', 'success');
+                }).catch(function() {
+                    fallbackCopy(url);
+                });
+            } else {
+                fallbackCopy(url);
+            }
+        }
+
+        function fallbackCopy(text) {
+            var input = document.createElement('input');
+            input.value = text;
+            input.style.position = 'fixed';
+            input.style.opacity = '0';
+            document.body.appendChild(input);
+            input.select();
+            try {
+                document.execCommand('copy');
+                showToast('已复制！', 'success');
+            } catch (e) {
+                showToast('复制失败', 'error');
+            }
+            document.body.removeChild(input);
+        }
+
+        // ================================================================
+        // 复制全部链接（仅当前页）
+        // ================================================================
+        function copyAllUrls() {
+            var allItems = getLocalMedia();
+            var total = allItems.length;
+            if (total === 0) {
+                showToast('没有可复制的文件', 'info');
+                return;
+            }
+
+            var start = (currentPage - 1) * PAGE_SIZE;
+            var end = Math.min(start + PAGE_SIZE, total);
+            var pageItems = allItems.slice(start, end);
+
+            if (pageItems.length === 0) {
+                showToast('当前页没有文件', 'info');
+                return;
+            }
+
+            var urls = pageItems.map(function(item) { 
+                return getDisplayName(item.originalName) + ': ' + item.url; 
+            });
+            var text = urls.join('\n');
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(function() {
+                    showToast('✅ 已复制 ' + pageItems.length + ' 个链接（当前页）', 'success');
+                }).catch(function() {
+                    fallbackCopy(text);
+                    showToast('✅ 已复制 ' + pageItems.length + ' 个链接（当前页）', 'success');
+                });
+            } else {
+                fallbackCopy(text);
+                showToast('✅ 已复制 ' + pageItems.length + ' 个链接（当前页）', 'success');
+            }
+        }
+
+        document.getElementById('copyAllBtn').addEventListener('click', copyAllUrls);
+
+        // ================================================================
+        // 上传 UI 控制
+        // ================================================================
+        var uploadZone = document.getElementById('uploadZone');
+        var uploadContent = document.getElementById('uploadContent');
+        var uploadingOverlay = document.getElementById('uploadingOverlay');
+        var uploadingText = document.getElementById('uploadingText');
+        var uploadingProgress = document.getElementById('uploadingProgress');
+
+        function showUploading(total) {
+            uploadZone.classList.add('uploading');
+            uploadingText.textContent = '正在上传文件...';
+            uploadingProgress.textContent = '0 / ' + total;
+        }
+
+        function updateUploadProgress(current, total) {
+            uploadingProgress.textContent = current + ' / ' + total;
+        }
+
+        function hideUploading() {
+            uploadZone.classList.remove('uploading');
+        }
+
+        // ================================================================
+        // 缩略图生成
+        // ================================================================
+        function getThumbnailUrl(item) {
+            if (item.resourceType === 'image') {
+                return item.url;
+            } else {
+                return PROXY_DOMAIN + '/video/upload/so_0,f_jpg/' + item.publicId;
+            }
+        }
+
+        // ================================================================
+        // 渲染与分页
+        // ================================================================
+        function render() {
+            var allItems = getLocalMedia();
+            var total = allItems.length;
+            var totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+
+            if (currentPage > totalPages) {
+                currentPage = totalPages;
+            }
+            if (currentPage < 1) {
+                currentPage = 1;
+            }
+
+            var start = (currentPage - 1) * PAGE_SIZE;
+            var end = Math.min(start + PAGE_SIZE, total);
+            var pageItems = allItems.slice(start, end);
+
+            var gallery = document.getElementById('gallery');
+            var countLabel = document.getElementById('countLabel');
+            var pageInfo = document.getElementById('pageInfo');
+            var prevBtn = document.getElementById('prevPage');
+            var nextBtn = document.getElementById('nextPage');
+
+            countLabel.textContent = total;
+
+            if (total === 0) {
+                gallery.innerHTML =
+                    '<div class="empty"><span class="big">🖼️</span>暂无文件，请上传一些吧！</div>';
+                pageInfo.textContent = '第 0 页 / 共 0 页';
+                prevBtn.disabled = true;
+                nextBtn.disabled = true;
+                return;
+            }
+
+            var sorted = pageItems.slice().sort(function(a, b) {
+                return new Date(b.uploadTime) - new Date(a.uploadTime);
+            });
+
+            var html = '';
+            for (var i = 0; i < sorted.length; i++) {
+                var item = sorted[i];
+                var thumbUrl = getThumbnailUrl(item);
+                var displayName = getDisplayName(item.originalName);
+                var isVideo = (item.resourceType === 'video');
+
+                html += '<div class="card" data-id="' + item.publicId + '">';
+                html += '<div class="media-wrapper" onclick="copyMedia(\'' + item.publicId + '\')">';
+                html += '<img src="' + thumbUrl + '" alt="' + displayName + '" loading="lazy"';
+                if (isVideo) {
+                    html += ' onerror="this.style.display=\'none\'; this.parentNode.querySelector(\'.thumbnail-fallback\').style.display=\'flex\';"';
+                }
+                html += ' />';
+                if (isVideo) {
+                    html += '<div class="thumbnail-fallback" style="display:none;">🎬</div>';
+                    html += '<div class="play-overlay"><span class="play-icon">▶</span></div>';
+                }
+                html += '</div>';
+                html += '<div class="info">';
+                html += '<div class="name" title="' + displayName + '" onclick="previewMedia(\'' + item.publicId +
+                    '\')">' + displayName + '</div>';
+                html += '<div class="meta">';
+                html += '<span>' + formatSize(item.size) + '</span>';
+                html += '<span>' + formatTime(item.uploadTime) + '</span>';
+                html += '</div>';
+                html += '</div>';
+                html += '<div class="actions">';
+                html += '<button class="btn btn-sm btn-danger" onclick="deleteHandler(\'' + item.publicId +
+                    '\')">删除</button>';
+                html += '</div>';
+                html += '</div>';
+            }
+
+            gallery.innerHTML = html;
+
+            pageInfo.textContent = '第 ' + currentPage + ' 页 / 共 ' + totalPages + ' 页';
+            prevBtn.disabled = (currentPage <= 1);
+            nextBtn.disabled = (currentPage >= totalPages);
+        }
+
+        function loadMedia() {
+            currentPage = 1;
+            render();
+        }
+
+        // ================================================================
+        // 媒体操作（复制、预览、删除）
+        // ================================================================
+        window.copyMedia = function(publicId) {
+            var items = getLocalMedia();
+            var item = null;
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].publicId === publicId) {
+                    item = items[i];
+                    break;
+                }
+            }
+            if (!item) {
+                showToast('文件未找到', 'error');
+                return;
+            }
+            copyUrl(item.url);
+        };
+
+        window.previewMedia = function(publicId) {
+            var items = getLocalMedia();
+            var item = null;
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].publicId === publicId) {
+                    item = items[i];
+                    break;
+                }
+            }
+            if (!item) {
+                showToast('文件未找到', 'error');
+                return;
+            }
+
+            var container = document.getElementById('modalMediaContainer');
+            container.innerHTML = '';
+
+            if (item.resourceType === 'image') {
+                var img = document.createElement('img');
+                img.src = item.url;
+                img.alt = getDisplayName(item.originalName);
+                img.onclick = function() { copyUrl(item.url); };
+                container.appendChild(img);
+            } else {
+                var video = document.createElement('video');
+                video.src = item.url;
+                video.controls = true;
+                video.autoplay = true;
+                video.style.maxWidth = '100%';
+                video.style.maxHeight = '85vh';
+                video.onclick = function() { copyUrl(item.url); };
+                video.onerror = function() {
+                    showToast('视频加载失败。文件可能已损坏或代理不可用。', 'error');
+                };
+                container.appendChild(video);
+            }
+
+            document.getElementById('modalName').textContent = getDisplayName(item.originalName);
+            document.getElementById('modalMeta').textContent = formatSize(item.size) + ' · ' + formatTime(item.uploadTime);
+            document.getElementById('modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.deleteHandler = function(publicId) {
+            if (!confirm('从列表中移除该文件？（云端文件不会被删除）')) return;
+            var items = getLocalMedia();
+            var newItems = [];
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].publicId !== publicId) {
+                    newItems.push(items[i]);
+                }
+            }
+            saveLocalMedia(newItems);
+            var total = newItems.length;
+            var totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+            if (currentPage > totalPages) {
+                currentPage = totalPages;
+            }
+            render();
+            showToast('已从列表移除', 'info');
+        };
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+            document.body.style.overflow = '';
+            setTimeout(function() {
+                document.getElementById('modalMediaContainer').innerHTML = '';
+            }, 300);
+        }
+
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // ================================================================
+        // 分页控制
+        // ================================================================
+        document.getElementById('prevPage').addEventListener('click', function() {
+            if (currentPage > 1) {
+                currentPage--;
+                render();
+            }
+        });
+
+        document.getElementById('nextPage').addEventListener('click', function() {
+            var total = getLocalMedia().length;
+            var totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+            if (currentPage < totalPages) {
+                currentPage++;
+                render();
+            }
+        });
+
+        document.getElementById('clearAllBtn').addEventListener('click', function() {
+            var items = getLocalMedia();
+            if (items.length === 0) {
+                showToast('没有可清空的文件', 'info');
+                return;
+            }
+            if (!confirm('确定要从列表中移除全部 ' + items.length + ' 个文件吗？')) return;
+            saveLocalMedia([]);
+            currentPage = 1;
+            render();
+            showToast('列表已清空', 'info');
+        });
+
+        // ================================================================
+        // Nnepie 上传
+        // ================================================================
+        async function uploadToCloudinary(file) {
+            var formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', UPLOAD_PRESET);
+
+            var endpoint = 'https://api.cloudinary.com/v1_1/' + CLOUD_NAME + '/upload';
+            var resourceType = 'image';
+
+            if (file.type.startsWith('video/')) {
+                resourceType = 'video';
+                endpoint = 'https://api.cloudinary.com/v1_1/' + CLOUD_NAME + '/video/upload';
+                formData.append('resource_type', 'video');
+            }
+
+            var response = await fetch(endpoint, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                var errorText = await response.text();
+                throw new Error('上传失败 (' + response.status + '): ' + errorText);
+            }
+
+            var result = await response.json();
+
+            // 构建带 q_auto,f_auto 的代理 URL
+            var pathMatch = result.url.match(/\/[a-z]+\/upload\/.+$/);
+            var path;
+            if (pathMatch) {
+                path = pathMatch[0];
+                path = path.replace(/\/[a-z]+\/upload\//, function(match) {
+                    return match + 'q_auto,f_auto/';
+                });
+            } else {
+                var urlObj = new URL(result.url);
+                path = urlObj.pathname;
+                path = path.replace(/\/[a-z]+\/upload\//, function(match) {
+                    return match + 'q_auto,f_auto/';
+                });
+            }
+            var proxyUrl = PROXY_DOMAIN + path;
+
+            return {
+                publicId: result.public_id,
+                url: proxyUrl,
+                originalName: file.name,
+                size: file.size,
+                uploadTime: new Date().toISOString(),
+                resourceType: resourceType,
+            };
+        }
+
+        // ================================================================
+        // 文件上传处理
+        // ================================================================
+        async function handleUploadFiles(files) {
+            var validFiles = [];
+            for (var i = 0; i < files.length; i++) {
+                var f = files[i];
+                var isImage = f.type.startsWith('image/');
+                var isVideo = f.type === 'video/mp4';
+                if (!isImage && !isVideo) {
+                    showToast('"' + f.name + '" 不是图片或MP4视频，已跳过', 'error');
+                    continue;
+                }
+                if (f.size > 100 * 1024 * 1024) {
+                    showToast('"' + f.name + '" 超过92MB（Nnepie免费限制），已跳过', 'error');
+                    continue;
+                }
+                validFiles.push(f);
+            }
+
+            if (validFiles.length === 0) return;
+
+            showUploading(validFiles.length);
+            var uploaded = 0;
+            var newItems = [];
+
+            for (var j = 0; j < validFiles.length; j++) {
+                var file = validFiles[j];
+                try {
+                    var result = await uploadToCloudinary(file);
+                    newItems.push(result);
+                    uploaded++;
+                    updateUploadProgress(uploaded, validFiles.length);
+                } catch (err) {
+                    showToast('上传 "' + file.name + '" 失败：' + err.message, 'error');
+                    updateUploadProgress(uploaded, validFiles.length);
+                }
+            }
+
+            hideUploading();
+
+            if (uploaded === 0) {
+                showToast('没有文件成功上传', 'error');
+                return;
+            }
+
+            var existing = getLocalMedia();
+            var updated = existing.concat(newItems);
+            saveLocalMedia(updated);
+            currentPage = 1;
+            render();
+            showToast('✅ 成功上传 ' + uploaded + ' 个文件', 'success');
+        }
+
+        // ================================================================
+        // 拖拽 / 点击上传
+        // ================================================================
+        var fileInput = document.getElementById('fileInput');
+
+        uploadZone.addEventListener('click', function(e) {
+            if (e.target.closest('.uploading-overlay')) return;
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', async function(e) {
+            var files = e.target.files;
+            if (files.length === 0) return;
+            await handleUploadFiles(files);
+            fileInput.value = '';
+        });
+
+        uploadZone.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            uploadZone.classList.add('dragover');
+        });
+
+        uploadZone.addEventListener('dragleave', function() {
+            uploadZone.classList.remove('dragover');
+        });
+
+        uploadZone.addEventListener('drop', async function(e) {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            var files = e.dataTransfer.files;
+            if (files.length === 0) return;
+            await handleUploadFiles(files);
+        });
+
+        // ================================================================
+        // 初始加载
+        // ================================================================
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        loadMedia();
+    </script>
+    <script src="https://www.ws-expo.com/js/data.js"></script>
+</body>
+</html>
